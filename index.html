@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sample-Security</title>
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      getItems("");
+
+      $("#txtItemSearch").keyup(function(){
+        console.log($(this).val());
+        getItems($(this).val());
+      });
+    });
+
+    function getItems(itemCode) {
+      $.ajax({
+        type: 'GET',
+        url: 'server/item.php',
+        data:{itemCode:itemCode},
+        dataType: "json",
+        success: function (data) {
+          viewTableData(data);
+        }
+      });
+    }
+
+    function viewTableData(data){
+      var target = $("#item-data");
+      target.empty();
+
+      $.each(data, function(index, value){
+        var tr = $('<tr>'); 
+
+        // var p = $('<p>').text(value.name);
+
+
+        var td1 = $('<td>');
+            td1.html(value.code);
+        var td2 = $('<td>');
+            td2.html(value.name);
+
+            tr.append(td1);
+            tr.append(td2);
+                    
+                tr.appendTo(target);
+    });
+    }
+  </script>
+</head>
+<br />
+<br />
+<br />
+<div>
+  item code
+<input type="text" id="txtItemSearch" />
+</div>
+<br />
+<div>
+<body>
+  <table border="1" style="border: black;">
+    <thead style="background-color: chartreuse;">
+      <tr>
+        <th>Code</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody id="item-data">
+
+      </tobdy>
+  </table>
+</div>
+
+</body>
+
+</html>
