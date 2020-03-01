@@ -4,51 +4,10 @@
 <head>
   <title>Sample-Security</title>
   <script src="js/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function () {
-      getItems("");
+  <script src="js/index.js"></script>
 
-      $("#txtItemSearch").keyup(function(){
-        console.log($(this).val());
-        getItems($(this).val());
-      });
-    });
-
-    function getItems(itemCode) {
-      $.ajax({
-        type: 'GET',
-        url: 'server/item.php',
-        data:{itemCode:itemCode},
-        dataType: "json",
-        success: function (data) {
-          viewTableData(data);
-        }
-      });
-    }
-
-    function viewTableData(data){
-      var target = $("#item-data");
-      target.empty();
-
-      $.each(data, function(index, value){
-        var tr = $('<tr>'); 
-
-        // var p = $('<p>').text(value.name);
-
-
-        var td1 = $('<td>');
-            td1.html(value.code);
-        var td2 = $('<td>');
-            td2.html(value.name);
-
-            tr.append(td1);
-            tr.append(td2);
-                    
-                tr.appendTo(target);
-    });
-    }
-  </script>
 </head>
+<body>
 <br />
 <br />
 <br />
@@ -58,7 +17,7 @@
 </div>
 <br />
 <div>
-<body>
+
   <table border="1" style="border: black;">
     <thead style="background-color: chartreuse;">
       <tr>
@@ -70,6 +29,32 @@
 
       </tobdy>
   </table>
+</div>
+
+
+<br />
+<div>
+  <h4>What is php</h4>
+  <p>
+    PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML.
+  </p>
+</div>
+<div>
+
+  <table>
+    <tbody id="comments">
+
+      </tobdy>
+  </table>
+</div>
+<br />
+<div>
+  add new comment:<br />
+  <textarea id="txtComment"></textarea>
+  <br />
+  name:<br />
+  <input type="text" id="txtUsername" />
+  <button id="btnComment" >comment</button>
 </div>
 
 </body>
